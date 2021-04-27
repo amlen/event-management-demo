@@ -1,6 +1,8 @@
 package com.example.eventmanagementdemo.models;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -8,12 +10,13 @@ import java.util.List;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "category_id")
-    private Long categoryId;
+    @Column(name = "id")
+    private Long id;
     private String name;
     private String description;
 
-   @OneToMany(mappedBy = "category")
+    @JsonManagedReference
+    @OneToMany(mappedBy = "category")
     private List<Event> events;
 
 
@@ -29,12 +32,12 @@ public class Category {
         this.description = description;
     }
 
-    public Long getCategoryId() {
-        return categoryId;
+    public Long getId() {
+        return id;
     }
 
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

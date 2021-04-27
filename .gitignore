@@ -31,3 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
+/src/main/java/com/example/eventmanagementdemo/dtos/
+/src/main/java/com/example/eventmanagementdemo/converters/

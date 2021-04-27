@@ -1,5 +1,7 @@
 package com.example.eventmanagementdemo.models;
 
+import com.example.eventmanagementdemo.dtos.CategoryDto;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -10,16 +12,17 @@ import java.util.List;
 @Entity(name = "events")
 public class Event {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "event_id")
-    private Long eventId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
     private String name;
     private String description;
     private String address;
     private Date date;
     private String organizer;
 
-   @ManyToOne
+    @JsonBackReference
+    @ManyToOne
     @JoinColumn(name="category_id")
     private Category category;
 
@@ -48,12 +51,12 @@ public class Event {
         this.category = category;
     }
 
-    public Long getEventId() {
-        return eventId;
+    public Long getId() {
+        return id;
     }
 
-    public void setEventId(Long eventId) {
-        this.eventId = eventId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

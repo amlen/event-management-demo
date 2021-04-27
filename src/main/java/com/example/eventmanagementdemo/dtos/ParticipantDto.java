@@ -1,35 +1,16 @@
-package com.example.eventmanagementdemo.models;
+package com.example.eventmanagementdemo.dtos;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Entity(name="participants")
-public class Participant {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+public class ParticipantDto {
+
     private Long id;
     private String first_name;
     private String last_name;
     private String email;
     private Character gender;
 
-    @ManyToMany
-    @JoinTable(
-            name = "participants_events",
-            joinColumns=@JoinColumn(name ="participant_id"),
-            inverseJoinColumns = @JoinColumn(name ="event_id"))
-    private List<Event> events;
-
-    public Participant() {
-    }
-
-    public Participant(String first_name, String last_name, String email, Character gender) {
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.email = email;
-        this.gender = gender;
-    }
 
     public Long getId() {
         return id;
@@ -71,11 +52,4 @@ public class Participant {
         this.gender = gender;
     }
 
-    public List<Event> getEvents() {
-        return events;
-    }
-
-    public void setEvents(List<Event> events) {
-        this.events = events;
-    }
 }
