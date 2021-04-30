@@ -1,9 +1,11 @@
 package com.example.eventmanagementdemo.controllers;
+import com.example.eventmanagementdemo.exceptions.ResourceNotFoundException;
 import com.example.eventmanagementdemo.models.Category;
 import com.example.eventmanagementdemo.services.ICategoryService;
 import com.sun.istack.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,8 +23,11 @@ public class CategoryController {
 
 
     @RequestMapping(value="{id}", method = RequestMethod.GET)
-    public Category getById(@PathVariable @NotNull  Long id){
-        return categoryService.get(id);
+    public ResponseEntity<Category> getById(@PathVariable @NotNull  Long id) throws ResourceNotFoundException /*throws ResourceNotFoundException */{
+        Category category = categoryService.get(id);
+        if(category == null)
+            throw new ResourceNotFoundException("Category not found");
+        return ResponseEntity.ok().body(category);
     }
 
     @PostMapping

@@ -1,4 +1,5 @@
 package com.example.eventmanagementdemo.services;
+import com.example.eventmanagementdemo.exceptions.ResourceNotFoundException;
 import com.example.eventmanagementdemo.models.Category;
 import com.example.eventmanagementdemo.repositories.ICategoryRepository;
 import org.springframework.beans.BeanUtils;
@@ -19,7 +20,7 @@ public class CategoryService implements  ICategoryService{
     }
 
     public Category get(Long id){
-        return categoryRepository.findById(id).get();
+        return  categoryRepository.findById(id).orElse(null);
     }
 
 
