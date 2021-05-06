@@ -20,6 +20,17 @@ public class EventDto {
     private String organizer;
     private String categoryName;
 
+    public EventDto() {
+    }
+
+    public EventDto(String name, String description, String address, Date date, String organizer, String categoryName) {
+        this.name = name;
+        this.description = description;
+        this.address = address;
+        this.date = date;
+        this.organizer = organizer;
+        this.categoryName = categoryName;
+    }
 
     public Long getId() {
         return id;
