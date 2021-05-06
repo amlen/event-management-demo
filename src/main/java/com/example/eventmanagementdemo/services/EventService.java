@@ -1,11 +1,18 @@
 package com.example.eventmanagementdemo.services;
+import com.example.eventmanagementdemo.dtos.CategoryDto;
+import com.example.eventmanagementdemo.dtos.EventCreateDto;
+import com.example.eventmanagementdemo.dtos.EventDto;
+import com.example.eventmanagementdemo.mappers.CategoryMapper;
+import com.example.eventmanagementdemo.mappers.EventCreateMapper;
+import com.example.eventmanagementdemo.mappers.EventMapper;
+import com.example.eventmanagementdemo.models.Category;
 import com.example.eventmanagementdemo.models.Event;
 import com.example.eventmanagementdemo.repositories.IEventRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,8 +22,14 @@ public class EventService implements  IEventService{
     private IEventRepository eventRepository;
 
     @Override
-    public List<Event> getAll() {
-        return eventRepository.findAll();
+    public List<EventDto> getAll() {
+        List<Event> events = eventRepository.findAll();
+        List<EventDto> eventsDto = new ArrayList<>();
+
+        for( Event event :events)
+            eventsDto.add(EventMapper.INSTANCE.EventToEventDto(event));
+
+        return eventsDto;
     }
 
    public Event get(Long id){
@@ -24,8 +37,8 @@ public class EventService implements  IEventService{
     }
 
 
-    public Event create(Event Event){
-        return eventRepository.saveAndFlush(Event);
+    public Event create(EventCreateDto event){
+        return eventRepository.saveAndFlush(EventCreateMapper.INSTANCE.EventDtoToEvent(event));
     }
 
     public void delete( Long id){

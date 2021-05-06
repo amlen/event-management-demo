@@ -1,4 +1,6 @@
 package com.example.eventmanagementdemo.controllers;
+import com.example.eventmanagementdemo.dtos.EventCreateDto;
+import com.example.eventmanagementdemo.dtos.EventDto;
 import com.example.eventmanagementdemo.models.Event;
 import com.example.eventmanagementdemo.services.IEventService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,7 @@ public class EventsController {
     private IEventService eventService;
 
     @GetMapping
-    public List<Event> list(){
+    public List<EventDto> list(){
         return eventService.getAll();
     }
 
@@ -26,7 +28,7 @@ public class EventsController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Event create(@RequestBody Event event){
+    public Event create(@RequestBody EventCreateDto event){
         return eventService.create(event);
     }
 

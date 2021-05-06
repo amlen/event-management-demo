@@ -1,4 +1,6 @@
 package com.example.eventmanagementdemo.controllers;
+import com.example.eventmanagementdemo.dtos.CategoryCreateDto;
+import com.example.eventmanagementdemo.dtos.CategoryDto;
 import com.example.eventmanagementdemo.exceptions.ResourceNotFoundException;
 import com.example.eventmanagementdemo.models.Category;
 import com.example.eventmanagementdemo.services.ICategoryService;
@@ -17,7 +19,7 @@ public class CategoryController {
     private ICategoryService categoryService;
 
     @GetMapping
-    public List<Category> list(){
+    public List<CategoryDto> list(){
         return categoryService.getAll();
     }
 
@@ -32,7 +34,7 @@ public class CategoryController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Category create(@RequestBody final Category category){
+    public Category create(@RequestBody final CategoryCreateDto category){
         return categoryService.create(category);
     }
 
